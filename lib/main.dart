@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unimar_app_pos/views/login_screen.dart';
+import 'package:unimar_app_pos/views/products_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoginScreen(),
+      home: const ProductsScreen(),
     );
   }
 }

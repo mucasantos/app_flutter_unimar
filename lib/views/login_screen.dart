@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:unimar_app_pos/constants/app_styles.dart';
 import 'package:unimar_app_pos/constants/assets.dart';
-import 'package:unimar_app_pos/views/widgets/category_widget.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    //Utilizo os controllers do TExtEditing para ter acesso as info do TExtfield
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController senhaController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -28,62 +31,53 @@ class LoginScreen extends StatelessWidget {
        * Criar validação
        * Funções
        */
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Image.asset(
-            AppAssets.store,
-            height: 100,
-          ),
-          Text(
-            'Faça o login',
-            style: AppStyles.bigTitle,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              const Icon(
-                Icons.whatshot,
-                color: Colors.deepPurpleAccent,
+      body: Form(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Image.asset(
+              AppAssets.store,
+            ),
+
+            //Input de  dados- TextField
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: TextField(
+                controller: emailController,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Email",
+                    hintText: "Informe o seu email"),
               ),
-              Container(
-                height: 80,
-                width: 80,
-                decoration: AppStyles.containerDecoFlexible(
-                  6,
-                  Colors.deepPurple,
+            ),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: TextField(
+                obscureText: true,
+                controller: senhaController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: "Senha",
+                  hintText: "Digite a sua senha",
                 ),
               ),
-              const Icon(
-                Icons.favorite,
-                color: Colors.deepPurpleAccent,
-              ),
-            ],
-          ),
-          Container(
-            margin: const EdgeInsets.only(bottom: 32),
-            padding: const EdgeInsets.all(16),
-            height: 150,
-            width: 150,
-            decoration: AppStyles.containerDeco,
-            child: const Text("Estou no Container"),
-          ),
-          CategoryWidget(
-            titleCat: "Frash Fuits & Vegetable",
-            imageCat: AppAssets.categ1,
-            color: Colors.blue,
-          ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                print(" Dados do textfield");
 
-          ElevatedButton(
-            onPressed: () {
-              print(" Cliquei...");
-            },
-            child: const Text("Login"),
-          )
-          //  Image.network(
-          //      'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-          //      height: 300)
-        ],
+                print(emailController.text);
+                print(senhaController.text);
+              },
+              child: const Text("Login"),
+            )
+            //  Image.network(
+            //      'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
+            //      height: 300)
+          ],
+        ),
       ),
     );
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:unimar_app_pos/constants/app_styles.dart';
 import 'package:unimar_app_pos/constants/assets.dart';
 import 'package:unimar_app_pos/views/widgets/category_widget.dart';
 

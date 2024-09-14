@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:unimar_app_pos/views/cadastro_screen.dart';
 import 'package:unimar_app_pos/views/login_screen.dart';
 import 'package:unimar_app_pos/views/products_screen.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const ProductsScreen(),
+      home: const LoginScreen(),
     );
   }
 }

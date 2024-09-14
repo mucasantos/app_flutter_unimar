@@ -7,9 +7,9 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //Utilizo os controllers do TExtEditing para ter acesso as info do TExtfield
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController senhaController = TextEditingController();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+    String? email, password;
 
     return Scaffold(
       appBar: AppBar(
@@ -32,50 +32,113 @@ class LoginScreen extends StatelessWidget {
        * Funções
        */
       body: Form(
+        key: formKey,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Image.asset(
               AppAssets.store,
             ),
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Email",
+                        hintText: "Informe o seu email"),
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Voce precisa digitar o email';
+                      }
 
-            //Input de  dados- TextField
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: TextField(
-                controller: emailController,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: "Email",
-                    hintText: "Informe o seu email"),
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: TextField(
-                obscureText: true,
-                controller: senhaController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Senha",
-                  hintText: "Digite a sua senha",
+                      return null;
+                    },
+                    onSaved: (String? newValue) {
+                      email = newValue;
+                    },
+                  ),
                 ),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                print(" Dados do textfield");
+                const SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: TextFormField(
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "Senha",
+                      hintText: "Digite a sua senha",
+                    ),
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Voce precisa digitar a senha';
+                      }
 
-                print(emailController.text);
-                print(senhaController.text);
-              },
-              child: const Text("Login"),
+                      if (value.length < 6) {
+                        return 'A senha precisa de 6 caracteres';
+                      }
+
+                      return null;
+                    },
+                    onSaved: (String? newValue) {
+                      password = newValue;
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    //Validacao das info do form
+                    final form = formKey.currentState;
+                    if (form == null || !form.validate()) {
+                      return;
+                    }
+                    form.save();
+
+                    //A partir deste ponto, posso enviar  os dados para  o server...
+                    //Caso o servidor   devolva OK,
+                    //Navego para proxima tela...
+                    //OU mostro mensagem de erro....
+
+                    print(email);
+                    print(password);
+                  },
+                  child: const Text("Login"),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Não tem conta?"),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        print("cliquei no texto azul....");
+                      },
+                      child: const Text(
+                        "Crie a sua conta.",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 100,
             )
-            //  Image.network(
-            //      'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-            //      height: 300)
           ],
         ),
       ),

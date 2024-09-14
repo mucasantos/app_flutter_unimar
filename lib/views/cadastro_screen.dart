@@ -37,7 +37,6 @@ class CadastroScreen extends StatelessWidget {
             Image.asset(
               AppAssets.loja,
             ),
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: TextFormField(
@@ -57,7 +56,6 @@ class CadastroScreen extends StatelessWidget {
                 },
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: TextFormField(
@@ -78,7 +76,6 @@ class CadastroScreen extends StatelessWidget {
                 },
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: TextFormField(
@@ -123,10 +120,31 @@ class CadastroScreen extends StatelessWidget {
                 print(password);
               },
               child: const Text("Cadastrar"),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Já tem conta?"),
+                const SizedBox(
+                  width: 5,
+                ),
+                InkWell(
+                  onTap: () {
+                    print("cliquei no texto azul....");
+                  },
+                  child: const Text(
+                    "Faça login.",
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 100,
             )
-            //  Image.network(
-            //      'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-            //      height: 300)
           ],
         ),
       ),

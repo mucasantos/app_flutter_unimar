@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:unimar_app_pos/models/rating_model.dart';
+
 class Product {
   final int id;
   final String title;
@@ -6,6 +8,7 @@ class Product {
   final String description;
   final String category;
   final String image;
+  final Rating rating;
   Product({
     required this.id,
     required this.title,
@@ -13,6 +16,7 @@ class Product {
     required this.description,
     required this.category,
     required this.image,
+    required this.rating,
   });
 
   //Converter o JSON para uma intancia do meu Produto que vem da API
@@ -24,6 +28,7 @@ class Product {
         price: json['price'].toDouble(),
         description: json['description'],
         category: json['category'],
-        image: json['image']);
+        image: json['image'],
+        rating: Rating.fromJson(json['rating']));
   }
 }

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:unimar_app_pos/mock/products.dart';
 import 'package:unimar_app_pos/models/product_model.dart';
 import 'package:unimar_app_pos/views/product_details.dart';
 import 'package:http/http.dart' as http;
@@ -38,6 +37,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
     //PReciso transformar em json para o app
     List<dynamic> jsonData = json.decode(response.body);
+
+    print(jsonData[0]['rating']);
 
     //Eu sei que o jsonData é uma lista (dinaminca) e vou utilizar o MAP para
     // transformar em uma lista de Produtos!

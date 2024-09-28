@@ -34,6 +34,8 @@ class _ProductDetailsState extends State<ProductDetails> {
             ),
           ),
           Text(widget.product.category),
+          Text(widget.product.rating.count.toString()),
+          Text(widget.product.rating.rate.toString()),
           Text(widget.product.description),
           Text(widget.product.price.toString()),
         ],

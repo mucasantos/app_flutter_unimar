@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:unimar_app_pos/constants/app_styles.dart';
 import 'package:unimar_app_pos/constants/assets.dart';
 import 'package:unimar_app_pos/views/products_screen.dart';
+import 'package:unimar_app_pos/views/widgets/category_widget.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -34,123 +35,125 @@ class LoginScreen extends StatelessWidget {
        */
       body: Form(
         key: formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Image.asset(
-              AppAssets.store,
-            ),
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: "Email",
-                        hintText: "Informe o seu email"),
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Voce precisa digitar o email';
-                      }
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.asset(
+                AppAssets.store,
+              ),
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: "Email",
+                          hintText: "Informe o seu email"),
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Voce precisa digitar o email';
+                        }
 
-                      return null;
-                    },
-                    onSaved: (String? newValue) {
-                      email = newValue;
-                    },
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: TextFormField(
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Senha",
-                      hintText: "Digite a sua senha",
-                    ),
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Voce precisa digitar a senha';
-                      }
-
-                      if (value.length < 6) {
-                        return 'A senha precisa de 6 caracteres';
-                      }
-
-                      return null;
-                    },
-                    onSaved: (String? newValue) {
-                      password = newValue;
-                    },
-                  ),
-                ),
-                const SizedBox(
-                  height: 50,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    //Validacao das info do form
-                    final form = formKey.currentState;
-                    if (form == null || !form.validate()) {
-                      return;
-                    }
-                    form.save();
-
-                    //A partir deste ponto, posso enviar  os dados para  o server...
-                    //Caso o servidor   devolva OK,
-                    //Navego para proxima tela...
-                    //OU mostro mensagem de erro....
-
-                    print(email);
-                    print(password);
-
-                    //O email e senha  OK => hipotese
-
-                    //push => inseri a nova tela em uma stack (pilha)
-                    //pushReplacement=> removeu a tela anterior da pilha
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const ProductsScreen(),
-                      ),
-                    );
-                  },
-                  child: const Text("Login"),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("Não tem conta?"),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        print("cliquei no texto azul....");
+                        return null;
                       },
-                      child: const Text(
-                        "Crie a sua conta.",
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold,
+                      onSaved: (String? newValue) {
+                        email = newValue;
+                      },
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: TextFormField(
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Senha",
+                        hintText: "Digite a sua senha",
+                      ),
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Voce precisa digitar a senha';
+                        }
+
+                        if (value.length < 6) {
+                          return 'A senha precisa de 6 caracteres';
+                        }
+
+                        return null;
+                      },
+                      onSaved: (String? newValue) {
+                        password = newValue;
+                      },
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      //Validacao das info do form
+                      final form = formKey.currentState;
+                      if (form == null || !form.validate()) {
+                        return;
+                      }
+                      form.save();
+
+                      //A partir deste ponto, posso enviar  os dados para  o server...
+                      //Caso o servidor   devolva OK,
+                      //Navego para proxima tela...
+                      //OU mostro mensagem de erro....
+
+                      print(email);
+                      print(password);
+
+                      //O email e senha  OK => hipotese
+
+                      //push => inseri a nova tela em uma stack (pilha)
+                      //pushReplacement=> removeu a tela anterior da pilha
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => const ProductsScreen(),
+                        ),
+                      );
+                    },
+                    child: const Text("Login"),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Não tem conta?"),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          print("cliquei no texto azul....");
+                        },
+                        child: const Text(
+                          "Crie a sua conta.",
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 100,
-            )
-          ],
+                    ],
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 100,
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:unimar_app_pos/constants/app_styles.dart';
 import 'package:unimar_app_pos/constants/assets.dart';
+import 'package:unimar_app_pos/views/home_page.dart';
 import 'package:unimar_app_pos/views/products_screen.dart';
 import 'package:unimar_app_pos/views/widgets/category_widget.dart';
 
@@ -117,7 +118,7 @@ class LoginScreen extends StatelessWidget {
                       //pushReplacement=> removeu a tela anterior da pilha
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (context) => const ProductsScreen(),
+                          builder: (context) => const HomePage(),
                         ),
                       );
                     },

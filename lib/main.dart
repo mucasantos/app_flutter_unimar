@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unimar_app_pos/views/favorite_screen.dart';
+import 'package:unimar_app_pos/views/home_page.dart';
 import 'package:unimar_app_pos/views/login_screen.dart';
 import 'package:unimar_app_pos/views/products_screen.dart';
 

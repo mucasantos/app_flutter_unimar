@@ -1,0 +1,13 @@
+https://docs.flutter.dev/data-and-backend/state-mgmt/simple
+
+https://pub.dev/packages/provider
+
+Biblioteca popularpara  gerenciamento de estado emFlutter.
+
+Facilidade de uso
+Desempenho= . eficiente
+Escalabilidade= para aplicacoes mais complexas..
+
+Passos para instalar:
+1. Adicionar Dep
+

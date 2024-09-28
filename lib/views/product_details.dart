@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:unimar_app_pos/models/product_model.dart';
+import 'package:unimar_app_pos/providers/favorite_provider.dart';
 
-class ProductDetails extends StatefulWidget {
+class ProductDetails extends StatelessWidget {
   const ProductDetails({
     super.key,
     required this.product,
@@ -10,12 +12,11 @@ class ProductDetails extends StatefulWidget {
   final Product product;
 
   @override
-  State<ProductDetails> createState() => _ProductDetailsState();
-}
-
-class _ProductDetailsState extends State<ProductDetails> {
-  @override
   Widget build(BuildContext context) {
+    //Estancia do provider criado => FavoriteProvider
+    final favoriteProvider = Provider.of<FavoriteProvider>(context);
+
+    bool isFavorite = favoriteProvider.isFavorite(product);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -23,21 +24,42 @@ class _ProductDetailsState extends State<ProductDetails> {
       ),
       body: Column(
         children: [
-          Image.network(
-            height: 300,
-            widget.product.image,
+          Stack(
+            children: [
+              Image.network(
+                height: 300,
+                width: double.infinity,
+                product.image,
+              ),
+              Positioned(
+                right: 30,
+                child: IconButton(
+                  onPressed: () {
+                    if (isFavorite) {
+                      favoriteProvider.removeFavoriteProduct(product);
+                    } else {
+                      favoriteProvider.addFavoriteProduct(product);
+                    }
+                  },
+                  icon: Icon(
+                    Icons.favorite,
+                    color: isFavorite ? Colors.red : null,
+                  ),
+                ),
+              )
+            ],
           ),
           Container(
             color: const Color.fromARGB(255, 45, 45, 45),
             child: Text(
-              widget.product.title,
+              product.title,
             ),
           ),
-          Text(widget.product.category),
-          Text(widget.product.rating.count.toString()),
-          Text(widget.product.rating.rate.toString()),
-          Text(widget.product.description),
-          Text(widget.product.price.toString()),
+          Text(product.category),
+          Text(product.rating.count.toString()),
+          Text(product.rating.rate.toString()),
+          Text(product.description),
+          Text(product.price.toString()),
         ],
       ),
     );

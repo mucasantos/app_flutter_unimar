@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unimar_app_pos/mock/products.dart';
+import 'package:unimar_app_pos/views/product_details.dart';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({super.key});
@@ -37,7 +38,19 @@ class _ProductsScreenState extends State<ProductsScreen> {
           ),
           itemCount: fakeProducts.length,
           itemBuilder: (BuildContext context, int index) {
-            return fakeProducts[index];
+            return GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ProductDetails(
+                        title: fakeProducts[index].titleCat,
+                        image: fakeProducts[index].imageCat,
+                        color: fakeProducts[index].color,
+                      ),
+                    ),
+                  );
+                },
+                child: fakeProducts[index]);
           }),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:unimar_app_pos/constants/app_styles.dart';
 import 'package:unimar_app_pos/constants/assets.dart';
+import 'package:unimar_app_pos/views/products_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -107,6 +108,16 @@ class LoginScreen extends StatelessWidget {
 
                     print(email);
                     print(password);
+
+                    //O email e senha  OK => hipotese
+
+                    //push => inseri a nova tela em uma stack (pilha)
+                    //pushReplacement=> removeu a tela anterior da pilha
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => const ProductsScreen(),
+                      ),
+                    );
                   },
                   child: const Text("Login"),
                 ),

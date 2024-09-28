@@ -36,7 +36,7 @@ class CategoryWidget extends StatelessWidget {
             style: const TextStyle(
               fontWeight: FontWeight.bold,
             ),
-          )
+          ),
         ],
       ),
     );

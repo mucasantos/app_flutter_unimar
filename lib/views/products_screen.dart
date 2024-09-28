@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:unimar_app_pos/models/product_model.dart';
+import 'package:unimar_app_pos/views/home_page.dart';
 import 'package:unimar_app_pos/views/product_details.dart';
 import 'package:http/http.dart' as http;
 import 'package:unimar_app_pos/views/widgets/category_widget.dart';
@@ -22,6 +23,12 @@ class _ProductsScreenState extends State<ProductsScreen> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
   List<Product> allProducts = [];
   getProducts() async {
     String baseUrl = "https://fakestoreapi.com/products";
@@ -36,7 +43,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
     });
   }
 
-  bool isBlue = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

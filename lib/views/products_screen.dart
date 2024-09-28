@@ -1,9 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:unimar_app_pos/controller/product_controller.dart';
 import 'package:unimar_app_pos/models/product_model.dart';
-import 'package:unimar_app_pos/views/home_page.dart';
 import 'package:unimar_app_pos/views/product_details.dart';
 import 'package:unimar_app_pos/views/widgets/category_widget.dart';
 
@@ -18,16 +15,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    getProducts();
     super.initState();
-  }
-
-  List<Product> allProducts = [];
-  getProducts() async {
-    List<Product> products = await ProductController().getAllProducts();
-    setState(() {
-      allProducts = products;
-    });
   }
 
   @override
@@ -41,14 +29,32 @@ class _ProductsScreenState extends State<ProductsScreen> {
           ),
         ),
       ),
-      body: allProducts.isEmpty
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : SingleChildScrollView(
-              child: Column(
+      body: SingleChildScrollView(
+        //Utilizar o Future com tipo de dados (tipado!)
+        child: FutureBuilder<List<Product>>(
+            future: ProductController().getAllProducts(),
+            builder: (context, snapshot) {
+              //snapshot => é a informacao  que vem do futuro
+
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (!snapshot.hasData) {
+                return const Center(
+                  child: Text("Sem informações"),
+                );
+              } else if (snapshot.hasError) {
+                return const Center(
+                  child: Text("Erro ao buscar as informações!!"),
+                );
+              }
+              //A ! (exclamacao) afirma que o valor não  é nulo!!
+              List<Product> allProducts = snapshot.data!;
+
+              return Column(
                 children: [
-                  const Text("data"),
+                  //  const Text("data"),
                   GridView.builder(
 
                       //As tres propriedades abaixo sao utilizadas para inserir o
@@ -78,15 +84,9 @@ class _ProductsScreenState extends State<ProductsScreen> {
                             ));
                       }),
                 ],
-              ),
-            ),
+              );
+            }),
+      ),
     );
   }
 }
-/**
- * No item que esta buildado,quando clicar me levar até uma nova tela, 
- * do item em questao...
- * 
- * GestureDetector => adicionar o clicak em qualquer widget
- * 
- */

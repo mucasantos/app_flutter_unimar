@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:unimar_app_pos/controller/product_controller.dart';
 import 'package:unimar_app_pos/models/product_model.dart';
 import 'package:unimar_app_pos/views/home_page.dart';
 import 'package:unimar_app_pos/views/product_details.dart';
-import 'package:http/http.dart' as http;
 import 'package:unimar_app_pos/views/widgets/category_widget.dart';
 
 class ProductsScreen extends StatefulWidget {
@@ -18,28 +18,15 @@ class _ProductsScreenState extends State<ProductsScreen> {
   @override
   void initState() {
     // TODO: implement initState
-
     getProducts();
     super.initState();
   }
 
-  @override
-  void dispose() {
-    pageController.dispose();
-    super.dispose();
-  }
-
   List<Product> allProducts = [];
   getProducts() async {
-    String baseUrl = "https://fakestoreapi.com/products";
-    final response = await http.get(Uri.parse(baseUrl));
-
-    //PReciso transformar em json para o app
-    List<dynamic> jsonData = json.decode(response.body);
-
+    List<Product> products = await ProductController().getAllProducts();
     setState(() {
-      allProducts =
-          jsonData.map((product) => Product.fromJson(product)).toList();
+      allProducts = products;
     });
   }
 

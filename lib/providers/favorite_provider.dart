@@ -12,11 +12,8 @@ class FavoriteProvider extends ChangeNotifier {
 //2.Lista de favoritos
 
   final List<Product> _favoriteProducts = [];
-
   //Pegar a lista de favoritos
-
   List<Product> get favoriteProducts => _favoriteProducts;
-
   //Add um produto aos favoritos
 
   void addFavoriteProduct(Product product) {

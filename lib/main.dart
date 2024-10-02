@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unimar_app_pos/providers/favorite_provider.dart';
+import 'package:unimar_app_pos/providers/product_provider.dart';
 
 import 'package:unimar_app_pos/views/login_screen.dart';
 
@@ -18,6 +19,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => FavoriteProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ProductProvider(),
         )
       ],
       child: MaterialApp(

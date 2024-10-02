@@ -47,6 +47,8 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: const Color.fromARGB(255, 188, 219, 200),
+          elevation: 5,
           onTap: onTap,
           currentIndex: currentPage,
           items: const [

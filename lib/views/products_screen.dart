@@ -27,12 +27,34 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Produtos",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
+        backgroundColor: const Color.fromARGB(255, 188, 219, 200),
+        shadowColor: const Color.fromARGB(255, 188, 219, 200),
+        leading: const Text('data'),
+        title: const Text('Title'),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(80.0),
+          child: Container(
+            padding: const EdgeInsets.all(16.0),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: <Color>[
+                  Color.fromARGB(255, 188, 219, 200),
+                  Color.fromARGB(255, 176, 213, 190)
+                ],
+              ),
+            ),
+            child: TextField(
+              decoration: InputDecoration(
+                  suffixIcon: IconButton(
+                      onPressed: () {}, icon: const Icon(Icons.search)),
+                  border: const OutlineInputBorder(),
+                  hintText: "Pesquisa"),
+            ),
           ),
         ),
+        actions: const [
+          Text('data'),
+        ],
       ),
       body: SingleChildScrollView(
           //Utilizar o Future com tipo de dados (tipado!)

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:unimar_app_pos/constants/app_styles.dart';
 import 'package:unimar_app_pos/constants/assets.dart';
 import 'package:unimar_app_pos/views/home_page.dart';
-import 'package:unimar_app_pos/views/products_screen.dart';
-import 'package:unimar_app_pos/views/widgets/category_widget.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -17,6 +15,7 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
+          key: const ValueKey('loginTitle'),
           "Login",
           style: AppStyles.bigTitle,
         ),
@@ -96,6 +95,9 @@ class LoginScreen extends StatelessWidget {
                     height: 50,
                   ),
                   ElevatedButton(
+                    key: const ValueKey(
+                        'loginButton'), // Adicione uma chave aqui
+
                     onPressed: () {
                       //Validacao das info do form
                       final form = formKey.currentState;
@@ -122,7 +124,9 @@ class LoginScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    child: const Text("Login"),
+                    child: const Text(
+                      "Login",
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
